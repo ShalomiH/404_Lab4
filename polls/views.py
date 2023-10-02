@@ -1,16 +1,3 @@
-# from django.http import HttpResponse
-# from django.shortcuts import get_object_or_404, render
-# from .models import Question
-
-
-# from django.http import HttpResponse, HttpResponseRedirect
-# from django.shortcuts import get_object_or_404, render
-# from django.urls import reverse
-
-# from .models import Choice, Question
-
-
-
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -22,8 +9,7 @@ from .serializers import QuestionSerializer
 
 from .models import Choice, Question
 
-
-
+# For the serializers
 @api_view(['GET'])
 def get_questions(request):
     """
@@ -45,7 +31,7 @@ def update_question(request, pk):
     return Response(status=400, data=serializer.errors)
 
 
-
+# generic
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_question_list'
@@ -64,7 +50,7 @@ class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
-# ...
+# custom
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -83,6 +69,9 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
+
+
+# SIDENOTE: below are the previous definitions for reference
 
 # def index(request):
 #     latest_question_list = Question.objects.order_by('-pub_date')[:5]

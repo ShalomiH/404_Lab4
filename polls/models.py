@@ -4,6 +4,9 @@ from django.db import models
 
 # Question and Choice entities, with subfields.
 class Question(models.Model):
+    # id =models.UUIDField()
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    # https://stackoverflow.com/questions/3936182/using-a-uuid-as-a-primary-key-in-django-models-generic-relations-impact
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField('date published')
 
