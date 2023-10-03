@@ -27,7 +27,10 @@ def update_question(request, pk):
     questions = Question.objects.get(id=pk)
     serializer = QuestionSerializer(questions, data=request.data, partial=True)
     if serializer.is_valid():
-        return Response(serializer.data)
+        #return Response(serializer.data)
+        # Update the data according to the serializer
+        serializer.save()
+        return Response(serializer.data, status=201)
     return Response(status=400, data=serializer.errors)
 
 
